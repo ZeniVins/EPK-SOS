@@ -1,0 +1,3 @@
+SOS_URL_PATTERN \S+\s*\S+
+SOS_JSON_WITH_EQUAL \{.*\=.*\}
+SOS_SPACE [ ]{3,}
