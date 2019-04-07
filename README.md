@@ -21,7 +21,7 @@ Download Kibana version 6.6.0 : https://www.elastic.co/downloads/past-releases/k
 7. install pip >= 9.0.1 on your computer
 8. install virtualenv: `pip install virtualenv`
 9. Access to the python project, and create a folder named `.env`, this folder will contain your dependencies
-   Go into your .env folder and execute: virtualenv elastic 
+   Go into your .env folder and execute: `virtualenv elastic` 
 10. access to your .env/elastic/Scrips and execute activate.bash (or : `source activate` for mac) yo are now under the elastic python environment.
 11. with the same cmd/terminal access to the root project folder and execute: `pip install -r requirements.txt`
 12. copy your log file into the folder logs (the name of your index will be the name of your file)
