@@ -207,8 +207,21 @@ custom_regex_folder = os.path.join(current_directory, 'custom_regex_folder')
 list_file_logs = {}
 ERROR_START_END_PATTERN = '********************************************************************************'
 mapping_indice = {"settings":{"number_of_shards":1,"number_of_replicas":1},
-                  "mappings":{"test":{"properties":{"timestamp":{"type":"date",
-                  "format":"yyyy-MM-dd HH:mm:ss.SSS"},"execution_time":{"type":"integer"}}}}}
+                  "mappings":{"test":{"buildingSummaryFlow":{"type":"text",
+                  "fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "config":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "dataweave":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "error_element":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "error_message":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "error_stack":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "execution_time":{"type":"integer"},"log":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "loglevel":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "package":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "scriptTransformer":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "subflow":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "timestamp":{"type":"date","format":"yyyy-MM-dd HH:mm:ss.SSS"},
+                  "type_log":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
+                  "url_host":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}}}}}
 # r=root, d=directories, f = files
 for r, d, f in os.walk(path_files_folder):
     for file in f:
