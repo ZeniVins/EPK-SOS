@@ -69,19 +69,19 @@ def error_extractor(log_file):
 def error_audit_extractor(log_file):
     error_object = {}
     code_error = log_file.readline()
-    if not code_error:
+    if not code_error or code_error == '\n' or code_error == '\r\n':
         return None
     tab_code = code_error.split(':')
-    if tab_code.__len__() >0:
+    if tab_code.__len__() >1:
         error_object['code'] = tab_code[1].replace('"','').replace(',','').rstrip('\r\n')
 
     message_error = log_file.readline()
 
-    if not message_error:
+    if not message_error or message_error == '\n' or message_error == '\r\n':
         return error_object
 
     tab_code_m = message_error.split(':')
-    if tab_code_m.__len__() >0:
+    if tab_code_m.__len__() >1:
         error_object['message'] = tab_code_m[1].replace('"','').rstrip('\r\n')
     log_file.readline()
 
