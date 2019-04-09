@@ -13,6 +13,7 @@ import traceback
 import logging
 import copy
 import sys
+import time
 
 def gendata(list):
 
@@ -198,6 +199,7 @@ def log_file_to_json(file_path, file_name_with_extention):
 
 current_directory = os.getcwd()
 log_directory = "logs"
+current_milli_time = lambda: int(round(time.time() * 1000))
 path_files_folder = os.path.join(current_directory, log_directory)
 if len(sys.argv) > 1:
     path_files_folder = sys.argv[1]
@@ -210,15 +212,25 @@ mapping_indice = {"settings":{"number_of_shards":1,"number_of_replicas":1},"mapp
 # r=root, d=directories, f = files
 for r, d, f in os.walk(path_files_folder):
     for file in f:
-        print(os.path.join(r, file))
-        create_indice_if_not_exists(file)
-        log_file_to_json(os.path.join(r, file), file)
+        if file.endswith('.log'):
+            print(os.path.join(r, file))
+            create_indice_if_not_exists(file)
+            log_file_to_json(os.path.join(r, file), file)
 
 
 
 for index_key in list_file_logs:
     index = list_file_logs[index_key]
     bulk_data_to_elastic(index, index_key.lower())
+
+
+for r, d, f in os.walk(path_files_folder):
+    for file in f:
+        if file.endswith('.log'):
+            complete_file_path = os.path.join(r, file)
+            renamed_complete_file_path = complete_file_path + '.' + str(current_milli_time()) + '.archive'
+            os.rename(complete_file_path, renamed_complete_file_path)
+            print('%s has been renamed to %s' %(complete_file_path, renamed_complete_file_path))
 
 
 
